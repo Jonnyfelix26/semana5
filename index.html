@@ -293,9 +293,7 @@ analyzeBtn.addEventListener('click', async () => {
   const predictions = await model.predict(source);
   predictions.sort((a,b) => b.probability - a.probability);
 
-  const top = predictions[0];
-  stampEl.textContent = isGoodLabel(top.className) ? "APROBADA" : "RECHAZADA";
-  stampEl.className = "stamp " + (isGoodLabel(top.className) ? "good" : "bad");
+
 
   barsEl.innerHTML = "";
   predictions.forEach(p => {
