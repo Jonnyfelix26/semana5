@@ -175,7 +175,7 @@
     <div class="status" id="status">Cargando modelo…</div>
 
     <div class="result" id="result">
-      <span class="stamp" id="stamp">—</span>
+      
       <div class="bars" id="bars"></div>
     </div>
  
@@ -294,9 +294,7 @@ analyzeBtn.addEventListener('click', async () => {
   predictions.sort((a,b) => b.probability - a.probability);
 
 
-  const top = predictions[0];
-  stampEl.textContent = isGoodLabel(top.className) ? "APROBADA" : "RECHAZADA";
-  stampEl.className = "stamp " + (isGoodLabel(top.className) ? "good" : "bad");
+
   
   barsEl.innerHTML = "";
   predictions.forEach(p => {
