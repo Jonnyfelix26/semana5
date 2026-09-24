@@ -130,10 +130,13 @@
   .bars{margin-top:22px;display:flex;flex-direction:column;gap:12px;}
   .bar-row .label{
     display:flex;justify-content:space-between;
-    font-size:13px;margin-bottom:5px;color:#5C5744;
+    font-size:13px;margin-bottom:5px;color:var(--ink);
+    font-weight:500;
   }
   .bar-track{background:var(--stone);border-radius:3px;height:8px;overflow:hidden;}
-  .bar-fill{height:100%;background:var(--leaf);border-radius:3px;transition:width .5s ease;}
+  .bar-fill{height:100%;border-radius:3px;transition:width .5s ease;}
+  .bar-fill.good{background:var(--leaf);}
+  .bar-fill.bad{background:var(--rust);}
   .status{font-size:14px;color:#8A836C;margin-top:16px;min-height:18px;}
   footer{margin-top:40px;font-size:12px;color:#9A9480;}
   @media (prefers-color-scheme: dark){
@@ -301,11 +304,12 @@ analyzeBtn.addEventListener('click', async () => {
   barsEl.innerHTML = "";
   predictions.forEach(p => {
     const pct = Math.round(p.probability * 100);
+    const cls = isGoodLabel(p.className) ? 'good' : 'bad';
     const row = document.createElement('div');
     row.className = 'bar-row';
     row.innerHTML = `
       <div class="label"><span>${prettify(p.className)}</span><span>${pct}%</span></div>
-      <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>`;
+      <div class="bar-track"><div class="bar-fill ${cls}" style="width:${pct}%"></div></div>`;
     barsEl.appendChild(row);
   });
 
